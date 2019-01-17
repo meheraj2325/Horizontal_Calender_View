@@ -34,19 +34,20 @@ public class ReminderDBHelper extends SQLiteOpenHelper {
 
         String createReminderTableSq2
                 = "CREATE TABLE "+TABLE_NAME_2+" (" +
-                "      _id INTEGER PRIMARY KEY," +
-                "      med_time TEXT PRIMARY KEY," +
-                "      cur_date TEXT PRIMARY KEY" +
+                "      _id INTEGER," +
+                "      _med_time TEXT," +
+                "      _cur_date TEXT," +
+                "PRIMARY KEY (_id, _med_time,_cur_date)" +
                 "  )";
 
         try {
-            Toast.makeText(context,"dBOnCreate is called",Toast.LENGTH_SHORT).show();
-
             db.execSQL(createReminderTableSql);
             db.execSQL(createReminderTableSq2);
+
+            Toast.makeText(context,"dBOnCreate is called",Toast.LENGTH_LONG).show();
         }catch (Exception e)
         {
-            Toast.makeText(context,"Exception : "+e,Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Exception : "+e,Toast.LENGTH_LONG).show();
         }
 
     }
