@@ -1,9 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddEditCreateActivity">
 
-</android.support.constraint.ConstraintLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/med_info_id"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/med_info"
+        android:background="#edeaea"
+        />
+
+    <EditText
+        android:id="@+id/med_name_id"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/med_info_hint"
+        android:textColorHint="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/dose_info_id"
+        android:layout_marginTop="4dp"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Dose_info"
+        android:background="#edeaea"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/custom_dose_id"
+            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/custom_dose"/>
+
+        <Spinner
+            android:id="@+id/dose_quantities_id"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/reminder_times_id"
+        android:layout_marginTop="4dp"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/reminders"
+        android:background="#edeaea"
+        />
+
+    <LinearLayout
+        android:id="@+id/reminder_times_parent_layout_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/reminder_times_list_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"/>
+
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/select_time_id"
+            android:layout_margin="6dp"
+            android:padding="2dp"
+            android:textSize="18sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="reminderTimePicker"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/time_select"
+            />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/additional_info_id"
+        android:layout_marginTop="4dp"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/additional_info"
+        android:background="#edeaea"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <LinearLayout
+            android:layout_weight="9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/choose_start_date_id"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="reminderStartDatePicker"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/start_date_choose"
+                />
+
+            <TextView
+                android:id="@+id/start_date_id"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="reminderStartDatePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="01/01/2019"
+                />
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="reminderStartDatePicker"
+            android:background="@drawable/ic_action_name_horizontal"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <LinearLayout
+            android:layout_weight="9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/choose_end_date_id"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="reminderEndDatePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/end_date_choose"
+                />
+
+            <TextView
+                android:id="@+id/end_date_id"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="reminderEndDatePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/end_date_select"
+                />
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="reminderEndDatePicker"
+            android:layout_weight="1"
+            android:background="@drawable/ic_action_name_horizontal"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</ScrollView>
