@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">HorizontalCalenderView2</string>
-    <string name="title_activity_add_edit_create">AddEditCreateActivity</string>
     <string name="med_info">Medicine Information</string>
     <string name="med_info_hint">Enter medicine name</string>
     <string name="Dose_info">Dosage Information</string>
@@ -14,9 +13,11 @@
     <string name="end_date_select">Select a Date(Optional)</string>
     <string name="canceling_reminder_alert_tile"> Cancel Reminder?</string>
     <string name="required">Please enter a value</string>
-    <string name="canceling_reminder_alert_message">Aro you sure you want to cancel this reminder?</string>
-
-
+    <string name="canceling_reminder_alert_message">Are you sure you want to cancel this reminder?</string>
+    <string name="deleting_reminder_alert_message">This is irreversible, and will remove\n all history. Are you sure you want to delete this reminder?</string>
+    <string name="deleting_reminder_alert_tile"> Delete Reminder?</string>
+    <string name="add_reminder">Create a Reminder</string>
+    <string name="edit_reminder">Edit a Reminder</string>
 
     <string-array name="dose_quantities">
         <item>mg</item>

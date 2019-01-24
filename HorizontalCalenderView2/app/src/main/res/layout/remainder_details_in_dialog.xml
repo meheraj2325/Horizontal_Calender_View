@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFF"
+    android:orientation="vertical"
+    android:padding="10dp"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFF"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#ededed">
+
+            <ImageButton
+                android:background="#ededed"
+                android:padding="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:id="@+id/delete_reminder_button_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/edit_reminder_button_id"
+                android:src="@drawable/ic_delete_black_24dp"
+                />
+
+            <ImageButton
+                android:layout_marginStart="6dp"
+                android:background="#ededed"
+                android:padding="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:id="@+id/edit_reminder_button_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_edit_black_24dp"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginTop="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medicine_name_view_id"
+                    android:text="uu"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="25sp"
+                    />
+                <TextView
+                    android:id="@+id/status_view_id"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Taken"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:padding="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="uu"
+                android:layout_marginBottom="4dp"
+                android:textSize="15sp"
+                android:id="@+id/schedule_view_id"
+                android:drawableStart="@drawable/ic_date_range_black_24dp"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:padding="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="uu"
+                android:textSize="15sp"
+                android:id="@+id/dosage_description_view_id"
+                android:drawableStart="@drawable/ic_description_black_24dp"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:padding="5dp"
+            android:background="#ededed"
+            android:orientation="horizontal"
+            >
+
+            <RelativeLayout
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_marginBottom="0dp"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/skip_button_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="3dp"
+                app:backgroundTint="@color/colorPrimary"
+                app:srcCompat="@drawable/ic_close_black_24dp" />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="4dp"
+                android:id="@+id/skip_view_id"
+                android:text="Skip"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary" />
+
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_marginBottom="0dp"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:padding="6dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/take_button_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="6dp"
+                    android:layout_alignParentTop="true"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_check_black_24dp" />
+
+                <TextView
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="4dp"
+                    android:text="Take"
+                    android:id="@+id/take_view_id"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginEnd = "15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_marginBottom="0dp"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:padding="6dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/snooze_button_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_alignParentTop="true"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_alarm_black_24dp" />
+
+                <TextView
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/snooze_view_id"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="4dp"
+                    android:text="Snooze"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

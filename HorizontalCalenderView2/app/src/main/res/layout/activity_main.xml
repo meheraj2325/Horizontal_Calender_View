@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:elevation="10dp"
+            android:elevation="20dp"
             android:orientation="vertical">
 
             <devs.mulham.horizontalcalendar.HorizontalCalendarView
@@ -31,13 +31,21 @@
                 app:textColorSelected="#368ed1"
                  />
 
-            <TextView
-                android:id="@+id/date_of_today_id"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="8dp"
-                android:textSize="18sp" />
+                android:background="#ffffff">
+                <TextView
+                    android:id="@+id/date_of_today_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="6dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:text="01/01/2019"/>
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -51,7 +59,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/med_info_recycler_view_id"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
 
             <TextView
                 android:layout_width="match_parent"

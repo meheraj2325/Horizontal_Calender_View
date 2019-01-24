@@ -7,6 +7,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.DialogPreference;
 import android.support.v7.app.AppCompatActivity;
@@ -34,12 +35,12 @@ import java.util.ArrayList;
 public class AddEditCreateActivity extends AppCompatActivity {
 
     String[] doseQuantities;
+    private SingleReminderInfo singleReminderInfo;
     private EditText medName,customDose;
     private TextView medInfo,doseInfo,singleTime,selectTime,startDate,endDate;
     private Spinner doseQuantitiesSpinner;
     private TimePickerDialog timePickerDialog;
     private DatePickerDialog datePickerDialog;
-    private LinearLayout reminderTimesParentLayout;
     private int currentHour,currentMin,currentYear,currentMonth,currentDay;
     private ListView reminderTimesListView;
     private AlertDialog.Builder alertDialogBuilder;
@@ -57,12 +58,22 @@ public class AddEditCreateActivity extends AppCompatActivity {
 
         bindWidgets();
 
+        if (getIntent().getExtras() != null) {
+            Object singleReminderInfo = getIntent().getExtras().get("reminder");
+            if (singleReminderInfo != null) {
+                this.singleReminderInfo = (SingleReminderInfo) singleReminderInfo;
+            }
+        }
+
+        bindValuesToInputs();
+        setTitle(singleReminderInfo == null ? R.string.add_reminder : R.string.edit_reminder);
+
         ArrayAdapter<String> quantityAdapter = new ArrayAdapter<String>(this,R.layout.dose_quantity_view,R.id.single_quantity_id, doseQuantities);
         doseQuantitiesSpinner.setAdapter(quantityAdapter);
 
         reminderTimesArray = new ArrayList<>();
         reminderTimesAdapter = new CustomAdapter(getApplicationContext(),reminderTimesArray);
-        reminderTimesListView.setEmptyView(findViewById(R.id.empty));
+        ///reminderTimesListView.setEmptyView(findViewById(R.id.empty));
         reminderTimesListView.setAdapter(reminderTimesAdapter);
 
         reminderTimesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -105,6 +116,11 @@ public class AddEditCreateActivity extends AppCompatActivity {
             }
         });
 
+        initializeStartDate();
+    }
+
+    private void initializeStartDate()
+    {
         final DatePicker datePicker = new DatePicker(this);
         currentDay = datePicker.getDayOfMonth();
         currentMonth = (datePicker.getMonth())+1;
@@ -117,6 +133,68 @@ public class AddEditCreateActivity extends AppCompatActivity {
         else dayString = currentDay + "/" + currentMonth + "/" + currentYear;
 
         startDate.setText(dayString);
+    }
+
+    public void bindWidgets()
+    {
+        doseQuantities = getResources().getStringArray(R.array.dose_quantities);
+        medName = findViewById(R.id.med_name_id);
+        customDose = findViewById(R.id.custom_dose_id);
+        medInfo = findViewById(R.id.med_info_id);
+        doseInfo = findViewById(R.id.dose_info_id);
+        doseQuantitiesSpinner = findViewById(R.id.dose_quantities_id);
+        reminderTimesListView = findViewById(R.id.reminder_times_list_id);
+        startDate = findViewById(R.id.start_date_id);
+        endDate = findViewById(R.id.end_date_id);
+    }
+
+    public void bindValuesToInputs()
+    {
+        if(singleReminderInfo!=null){
+            int iid = singleReminderInfo.getId();
+
+            medName.setText(singleReminderInfo.getReminderMedName());
+            String dose = singleReminderInfo.getReminderMedDoseInfo();
+            String quantity = findDosageQuantity(dose);
+            if(!quantity.equals("none")){
+                int idx = dose.lastIndexOf(quantity);
+                dose = dose.substring(0,idx);
+            }
+            customDose.setText(dose);
+            //doseQuantitiesSpinner.setSelection(((ArrayAdapter<String>) doseQuantitiesSpinner.getAdapter()).getPosition(quantity));
+
+            /*Cursor cursor1 = reminderDBHelper.getStartAndEndDate(iid);
+            Cursor cursor2 = reminderDBHelper.getReminderTimes(iid);
+
+            String stDate,edDate;
+            while(cursor1.moveToNext()){
+                stDate = cursor1.getString(cursor1.getColumnIndexOrThrow("start_date"));
+                edDate = cursor1.getString(cursor1.getColumnIndexOrThrow("end_date"));
+                startDate.setText(stDate);
+                endDate.setText(edDate);
+            }
+
+            while (cursor2.moveToNext()){
+                String time = cursor2.getString(cursor2.getColumnIndexOrThrow("_med_time"));
+                SingleReminderTime temp = new SingleReminderTime(time);
+                reminderTimesArray.add(temp);
+                reminderTimesAdapter.notifyDataSetChanged();
+                reminderTimesAdapter.updateRemindersList(reminderTimesArray);
+            }
+            selectTime.setText(R.string.time_add);*/
+        }
+    }
+
+    public String findDosageQuantity(String s){
+        if(s.lastIndexOf("ml")!=-1) return "ml";
+        if(s.lastIndexOf("mg")!=-1) return "mg";
+        if(s.lastIndexOf("cc")!=-1) return "cc";
+        if(s.lastIndexOf("gr")!=-1) return "gr";
+        if(s.lastIndexOf("tbsp")!=-1) return "tbsp";
+        if(s.lastIndexOf("tsp")!=-1) return "tsp";
+        if(s.lastIndexOf("squeezes")!=-1) return "squeezes";
+        if(s.lastIndexOf("drops")!=-1) return "drops";
+        return "none";
     }
 
     private boolean validateInput() {
@@ -143,20 +221,6 @@ public class AddEditCreateActivity extends AppCompatActivity {
 
     private void showError(EditText field, int messageRes) {
         field.setError(getString(messageRes));
-    }
-
-    public void bindWidgets()
-    {
-        doseQuantities = getResources().getStringArray(R.array.dose_quantities);
-        medName = findViewById(R.id.med_name_id);
-        customDose = findViewById(R.id.custom_dose_id);
-        medInfo = findViewById(R.id.med_info_id);
-        doseInfo = findViewById(R.id.dose_info_id);
-        doseQuantitiesSpinner = findViewById(R.id.dose_quantities_id);
-        reminderTimesParentLayout = findViewById(R.id.reminder_times_parent_layout_id);
-        reminderTimesListView = findViewById(R.id.reminder_times_list_id);
-        startDate = findViewById(R.id.start_date_id);
-        endDate = findViewById(R.id.end_date_id);
     }
 
     @Override
@@ -196,23 +260,78 @@ public class AddEditCreateActivity extends AppCompatActivity {
             return true;
         }
         if(item.getItemId()==R.id.done_reminder){
-            onSave();
+            boolean flag = onSave();
+            if(flag){
+                Intent intent = new Intent(AddEditCreateActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void onSave()
+    public boolean onSave()
     {
+        if(singleReminderInfo!=null){
+            int iid = singleReminderInfo.getId();
+            reminderDBHelper.deleteASingleReminderHistory(iid);
+        }
+
         if(validateInput()){
             String medNameString = medName.getText().toString();
             String customDoseString = customDose.getText().toString();
-            customDoseString += (" " + doseQuantitiesSpinner.getSelectedItem().toString());
+            String temp = doseQuantitiesSpinner.getSelectedItem().toString();
+            if(!temp.equals("none"))customDoseString += (" " + temp);
 
             String startDateOfReminder = startDate.getText().toString();
             String endDateOfReminder = endDate.getText().toString();
 
+            Log.d("HI",medNameString + " " + customDoseString + " " + startDateOfReminder + " " + endDateOfReminder);
+
+            long rowId = reminderDBHelper.insertDataToDBTable1(medNameString,customDoseString,startDateOfReminder,endDateOfReminder);
+            if(rowId==-1){
+                try
+                {
+                    Toast.makeText(getApplicationContext(),"Unsuccesfull" ,Toast.LENGTH_LONG).show();
+                }catch (Exception e)
+                {
+                    Toast.makeText(getApplicationContext(),"Exception " + e,Toast.LENGTH_LONG).show();
+                }
+            }
+            else{
+                try
+                {
+                    Toast.makeText(getApplicationContext(),"Row is successfully inserted in table 1",Toast.LENGTH_SHORT).show();
+
+                    long rowId2 = reminderDBHelper.insertDataToDBTable2(rowId,reminderTimesArray,startDateOfReminder,endDateOfReminder);
+
+                    if(rowId2==-1){
+                        try
+                        {
+                            Toast.makeText(getApplicationContext(),"Unsuccesfull" ,Toast.LENGTH_LONG).show();
+                        }catch (Exception e)
+                        {
+                            Toast.makeText(getApplicationContext(),"Exception " + e,Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else{
+                        try
+                        {
+                            Toast.makeText(getApplicationContext(),"Row is successfully inserted in table 2",Toast.LENGTH_SHORT).show();
+                        }catch (Exception e)
+                        {
+                            Toast.makeText(getApplicationContext(),"Exception " + e,Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }catch (Exception e)
+                {
+                    Toast.makeText(getApplicationContext(),"Exception " + e,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            return true;
         }
+        return false;
     }
 
     public void reminderTimePicker(View v)
