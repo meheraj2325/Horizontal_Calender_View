@@ -130,7 +130,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="3dp"
                 app:backgroundTint="@color/colorPrimary"
-                app:srcCompat="@drawable/ic_close_black_24dp" />
+                app:srcCompat="@drawable/ic_close_white_24dp" />
 
             <TextView
                 android:layout_alignParentBottom="true"

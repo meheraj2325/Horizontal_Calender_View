@@ -71,7 +71,7 @@ public class AddEditCreateActivity extends AppCompatActivity {
 
         reminderTimesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 TimePicker timePicker = new TimePicker(AddEditCreateActivity.this);
 
                 currentHour = timePicker.getCurrentHour();
@@ -80,7 +80,7 @@ public class AddEditCreateActivity extends AppCompatActivity {
                 timePickerDialog = new TimePickerDialog(AddEditCreateActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            public void onTimeSet (TimePicker view, int hourOfDay, int minute) {
                                 singleTime = findViewById(R.id.single_time_id);
 
                                 String status = "AM",timeString;
@@ -94,14 +94,17 @@ public class AddEditCreateActivity extends AppCompatActivity {
                                 else if(hourOf12HourFormat<10) timeString = "0" + hourOf12HourFormat + ":" + minute + " " + status;
                                 else if(minute<10) timeString = hourOf12HourFormat + ":0" + minute + " " + status;
                                 else timeString = hourOf12HourFormat + ":" + minute + " " + status;
-                                singleTime.setText(timeString);
+
+                                reminderTimesArray.get(position).setTime(timeString);
+                                reminderTimesAdapter.notifyDataSetChanged();
                             }
                         },currentHour,currentMin,false);
 
                 timePickerDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Your code
+                        reminderTimesArray.remove(position);
+                        reminderTimesAdapter.notifyDataSetChanged();
                     }
                 });
 
