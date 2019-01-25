@@ -21,7 +21,7 @@ import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
-public class MainActivity extends AppCompatActivity {
+public class ReminderMainActivity extends AppCompatActivity {
 
     TextView dateOfToday;
     RecyclerView medicineInfoRecyclerView;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_reminder_main);
 
         reminderDBHelper = new ReminderDBHelper(this);
         SQLiteDatabase sqLiteDatabase = reminderDBHelper.getWritableDatabase();
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickFloatingButton(View v)
     {
-        Intent intent = new Intent(MainActivity.this,AddEditCreateActivity.class);
+        Intent intent = new Intent(ReminderMainActivity.this,AddEditCreateActivity.class);
         startActivity(intent);
     }
 }

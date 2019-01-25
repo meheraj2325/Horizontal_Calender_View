@@ -1,29 +1,22 @@
 package com.example.user.horizontalcalenderview2;
 
-import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.preference.DialogPreference;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -243,7 +236,7 @@ public class AddEditCreateActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(AddEditCreateActivity.this,MainActivity.class);
+                    Intent intent = new Intent(AddEditCreateActivity.this, ReminderMainActivity.class);
                     startActivity(intent);
                 }
             });
@@ -262,7 +255,7 @@ public class AddEditCreateActivity extends AppCompatActivity {
         if(item.getItemId()==R.id.done_reminder){
             boolean flag = onSave();
             if(flag){
-                Intent intent = new Intent(AddEditCreateActivity.this,MainActivity.class);
+                Intent intent = new Intent(AddEditCreateActivity.this, ReminderMainActivity.class);
                 startActivity(intent);
             }
             return true;
